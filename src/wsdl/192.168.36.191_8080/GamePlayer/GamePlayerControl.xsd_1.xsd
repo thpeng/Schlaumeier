@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.2.0-1 (tags/2.2.0u1-7139; 2012-06-02T10:55:19+0000) JAXWS-RI/2.2.6-2 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://gameplayercontrol.game.bnd.ch/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://gameplayercontrol.game.bnd.ch/">
+
+<xs:element name="finishGame" type="tns:finishGame"/>
+
+<xs:element name="finishGameResponse" type="tns:finishGameResponse"/>
+
+<xs:element name="giveNextGuess" type="tns:giveNextGuess"/>
+
+<xs:element name="giveNextGuessResponse" type="tns:giveNextGuessResponse"/>
+
+<xs:element name="receiveFeedbackForLastGuess" type="tns:receiveFeedbackForLastGuess"/>
+
+<xs:element name="receiveFeedbackForLastGuessResponse" type="tns:receiveFeedbackForLastGuessResponse"/>
+
+<xs:element name="startNewGame" type="tns:startNewGame"/>
+
+<xs:element name="startNewGameResponse" type="tns:startNewGameResponse"/>
+
+<xs:complexType name="receiveFeedbackForLastGuess">
+<xs:sequence>
+<xs:element name="game" type="tns:game" minOccurs="0"/>
+<xs:element name="guessId" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="game">
+<xs:sequence>
+<xs:element name="availableCharacters" type="xs:string" minOccurs="0"/>
+<xs:element name="creditsReductionPerWrongCharacter" type="xs:int"/>
+<xs:element name="creditsReductionPerWrongWord" type="xs:int"/>
+<xs:element name="historyOfGuesses" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="id" type="xs:long"/>
+<xs:element name="maxNumOfCredits" type="xs:int"/>
+<xs:element name="oponentCreditsLeft" type="xs:int"/>
+<xs:element name="oponentPlayerName" type="xs:string" minOccurs="0"/>
+<xs:element name="state" type="tns:gameState" minOccurs="0"/>
+<xs:element name="wordToGuess" type="xs:string" minOccurs="0"/>
+<xs:element name="wrongCharacters" type="xs:string" minOccurs="0"/>
+<xs:element name="wrongWords" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="youBegin" type="xs:boolean"/>
+<xs:element name="yourCreditsLeft" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="receiveFeedbackForLastGuessResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="finishGame">
+<xs:sequence>
+<xs:element name="game" type="tns:game" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="finishGameResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="giveNextGuess">
+<xs:sequence>
+<xs:element name="game" type="tns:game" minOccurs="0"/>
+<xs:element name="guessId" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="giveNextGuessResponse">
+<xs:sequence>
+<xs:element name="playersGuess" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="startNewGame">
+<xs:sequence>
+<xs:element name="game" type="tns:game" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="startNewGameResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:simpleType name="gameState">
+<xs:restriction base="xs:string">
+<xs:enumeration value="INITIALIZED"/>
+<xs:enumeration value="RUNNING_LAST_GUESS_CORRECT_CHARACTER"/>
+<xs:enumeration value="RUNNING_LAST_GUESS_WRONG_CHARACTER"/>
+<xs:enumeration value="RUNNING_LAST_GUESS_WRONG_RESULT"/>
+<xs:enumeration value="FINISHED_YOU_WON"/>
+<xs:enumeration value="FINISHED_OPONENT_WON"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>
